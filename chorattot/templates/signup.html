@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Chợ rất tốt</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">
+        <img src="{% static 'images/logo.svg' %}" alt="Logo" />
+      </div>
+      <div class="form-container">
+        <h2>ĐĂNG KÝ</h2>
+        <form>
+          <div class="form-group">
+            <label for="fullname">Họ và tên</label>
+            <input type="text" id="fullname" placeholder="Họ và tên" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">Điện thoại</label>
+            <input type="tel" id="phone" placeholder="Điện thoại" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Email" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Mật khẩu</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Mật khẩu"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="confirm-password">Xác nhận mật khẩu</label>
+            <input
+              type="password"
+              id="confirm-password"
+              placeholder="Xác nhận mật khẩu"
+              required
+            />
+          </div>
+          <div class="buttons">
+            <button type="button" class="login">Đăng nhập</button>
+            <button type="submit" class="register">Đăng ký</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
