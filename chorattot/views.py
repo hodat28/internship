@@ -10,3 +10,9 @@ def signin(request):
 
 def forgotPassword(request):
     return render(request, 'forgotPassword.html')
+
+def newPassword(request):
+    return render(request, 'newPassword.html')
+
+def changePassword(request):
+    return render(request, 'changePassword.html')
