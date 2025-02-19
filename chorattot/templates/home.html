@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Trang chủ{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+{% endblock %}
+
+
+{% block scripts %}
+    <script src="{% static 'scripts/home.js' %}" defer></script>
+{% endblock %}
+
+{% block content %}
+    <div class="posts"></div>
+{% endblock %}

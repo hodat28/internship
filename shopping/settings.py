@@ -55,7 +55,7 @@ ROOT_URLCONF = 'shopping.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "chorattot/templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
