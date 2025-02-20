@@ -51,13 +51,20 @@ const loadPosts = () => {
                         </a>
                         <div class="right-side">
                             <div class="date">18/2/2025</div>
-                            <div class="category">&#x2022;Đồ gia dụng</div>
+                            <div class="post-status">Còn hàng</div>
                         </div>
                     </div>
                     <div class="bottom">
                         <div class="product">
-                            <div class="name">Máy giặt Panasonic</div>
+                            <div class="name">
+                                Bàn làm việc gỗ MDF chống ẩm, phủ Melamine cao cấp
+                            </div>
+                            <div style="margin-bottom: 5px">
+                                <span class="product-status">Hàng mới</span>
+                                <span class="category">Đồ gia dụng</span>
+                            </div>
                             <div class="price">800,000 VND</div>
+                            <div class="title">Cần bán gấp, giao dịch trong vòng 1h</div>
                             <div style="font-style: italic;">Mô tả:</div>
                             <ul class="desc">
                                 <li>Còn bảo hành</li>

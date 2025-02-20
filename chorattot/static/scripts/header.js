@@ -21,5 +21,11 @@ const closeMenu = () => {
   smallMenu.style.display = "none";
 };
 
-menuContainer.addEventListener("mouseover", openMenu);
-menuContainer.addEventListener("mouseleave", closeMenu);
+menuContainer.addEventListener("click", () => {
+  if (isMenuOpen) {
+    closeMenu();
+  }
+  else {
+    openMenu();
+  }
+});

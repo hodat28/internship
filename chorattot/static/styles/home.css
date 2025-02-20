@@ -1,13 +1,3 @@
-.content-container {
-  box-shadow: 3px 4px 2px #aaaaaa, 
-              3px -4px 2px #aaaaaa,
-              /* -3px -4px 2px #aaaaaa, */
-              -3px 4px 2px #aaaaaa;
-  border-radius: 0 0 10px 10px;
-  padding: 40px;
-  width: 800px;
-}
-
 .content-container .post {
   display: flex;
   flex-direction: column;
@@ -37,11 +27,19 @@
   align-items: center;
 }
 
+.post .top {
+  margin-bottom: 5px;
+}
+
 .post .top,
 .post .bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.post .bottom {
+  gap: 5px;
 }
 
 .post .avatar {
@@ -86,9 +84,13 @@
 
 .post .seller .address,
 .post .right-side .date,
-.post .right-side .category {
+.post .post-status {
   font-style: italic;
   font-size: 0.75em;
+}
+
+.post .product {
+  max-width: 50%;
 }
 
 .post .product .name {
@@ -98,10 +100,28 @@
 .post .product .name,
 .post .product .price {
   font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .post .product .price {
   color: red;
+}
+
+.post .product .product-status {
+  margin-right: 5px;
+}
+
+.post .product .product-status,
+.post .category {
+  background-color: #dddfe0;
+  color: #667085;
+  font-size: 0.75em;
+  padding: 3px;
+  font-weight: normal;
+}
+
+.post .title {
+  font-weight: bold;
 }
 
 .post .product .desc {
@@ -166,12 +186,13 @@ button:hover, a:hover {
   opacity: 0.7;
 }
 
-@media (max-width: 768px) {
-  .content-container {
-    border-radius: 0;
-    padding: 20px 10px;
-  }
+.post .post-status {
+  background-color: var(--green);
+  color: white;
+  padding: 3px;
+}
 
+@media (max-width: 768px) {
   .post .content .bottom {
     flex-direction: column;
     align-items: stretch;
@@ -183,6 +204,10 @@ button:hover, a:hover {
     align-self: stretch;
   }
 
+  .post .product {
+    max-width: 100%;
+  }
+
   .post .product .desc {
     margin-bottom: 5px;
   }
@@ -191,10 +216,4 @@ button:hover, a:hover {
     flex-direction: column;
   }
 
-}
-
-@media (max-width: 1024px) {
-  .content-container {
-    width: 100%;
-  }
 }
