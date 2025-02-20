@@ -26,6 +26,7 @@
 
 .sidebar .logo {
   max-width: 100px;
+  border-radius: 50%;
 }
 
 .sidebar ul {
@@ -69,16 +70,17 @@
 }
 
 .sidebar .toggle-sidebar {
-  position: absolute;   
-    right: -10%;
-    top: 30%;
-    background-color: var(--green);
-    border: none;
-    cursor: pointer;
-    padding: 3px;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
+  position: fixed;   
+  left: 185px;
+  top: 30%;
+  background-color: var(--green);
+  border: none;
+  cursor: pointer;
+  padding: 3px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  transition: left 0.3s ease;
 }
 
 .sidebar .toggle-sidebar:hover {
@@ -100,11 +102,27 @@
 
 }
 
-/* @media (max-height: 400px) { 
+@media (max-height: 380px) { 
   .sidebar {
-    height: fit-content;
-    overflow: auto;
+    max-height: 400px;
+    overflow-y: auto;
+    bottom: 0;
+    top: 0;
+    border-radius: 0;
+  }
+
+  .sidebar::-webkit-scrollbar {
+    width: 6px; /* Giảm kích thước thanh cuộn */
+  }
+
+  .sidebar::-webkit-scrollbar-thumb {
+    background-color: lightgrey; /* Màu thanh cuộn */
+    border-radius: 10px; /* Bo tròn thanh cuộn */
+  }
+
+  .sidebar::-webkit-scrollbar-track {
+    background: #f0f0f0; /* Màu nền của track */
   }
 
 
-} */
+}
