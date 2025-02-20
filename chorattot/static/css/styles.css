@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&display=swap');
+
 :root {
   --green-color: #4CAF50;
   --black-color: #000;
@@ -79,6 +81,14 @@ input {
   background: var(--input-background);
   width: 100%;
 }
+/* 
+.form-input {
+  padding: 10px 0 10px 10px;
+  border: 1px solid #CCC;
+  border-radius: 5px;
+  background: var(--input-background);
+  width: 100%;
+} */
 
 .buttons {
   display: flex;
@@ -89,33 +99,23 @@ input {
 
 button {
   padding: 10px 20px;
-  margin: 0 auto;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
 }
 
-.getOTP {
+.getOTP, .signup .login {
   background: #CCC;
   color: var(--black-color);
 }
 
-.changePassword {
+.changePassword, .confirmPassword, .signup .register, .signin .login {
   background: var(--green-color);
   color: white;
 }
 
-.changePassword:hover {
-  background: var(--button-hover);
-}
-
-.confirmPassword {
-  background: var(--green-color);
-  color: white;
-}
-
-.confirmPassword:hover {
+.changePassword:hover, .confirmPassword:hover, .register:hover, .login:hover {
   background: var(--button-hover);
 }
 
@@ -124,7 +124,7 @@ a {
   color: var(--black-color);
 }
 
-.login {
+.forgot-password {
   color: var(--green-color);
 }
 
@@ -134,31 +134,12 @@ a {
       align-items: center;
       width: 70%;
   }
-
-  .logo {
-      flex: none;
-      margin-bottom: 20px;
-  }
-
   .logo img {
       width: 30%;
   }
-
   .form-container {
-      flex: none;
       padding: 20px;
       width: 100%;
-  }
-
-  .form-group input {
-      width: 100%;
-  }
-}
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .container {
-      flex-direction: column;
-      width: 90%;
   }
 }
 
@@ -172,15 +153,8 @@ a {
   .logo img {
       width: 80px;
   }
-
   .form-container {
       padding: 15px;
-  }
-}
-
-@media (max-width: 414px) {
-  .form-container {
-      padding: 10px;
   }
 }
 
@@ -188,19 +162,8 @@ a {
   .buttons {
       flex-direction: column;
   }
-
-  .form-group input {
-      width: 96.4%;
-  }
-
   button {
       width: 100%;
       margin-bottom: 5px;
-  }
-}
-
-@media (max-width: 320px) {
-  .logo h2 {
-      font-size: 1.2rem;
   }
 }

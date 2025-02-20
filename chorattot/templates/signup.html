@@ -11,7 +11,7 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/signup.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
   </head>
   <body>
     <div class="container">
@@ -20,39 +20,38 @@
       </div>
       <div class="form-container">
         <h2>ĐĂNG KÝ</h2>
-        <form>
+        <form mehtod="POST" action="/signup">
+          {% csrf_token %}
           <div class="form-group">
             <label for="fullname">Họ và tên</label>
-            <input type="text" id="fullname" placeholder="Họ và tên" required />
+            {% comment %} {{form.fullname}} {% endcomment %}
+            <input type="text" id="fullname" required>
           </div>
           <div class="form-group">
-            <label for="phone">Điện thoại</label>
-            <input type="tel" id="phone" placeholder="Điện thoại" required />
+            <label for="phone">Số điện thoại</label>
+            {% comment %} {{form.phone}} {% endcomment %}
+            <input type="text" id="phone" required>
           </div>
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Email" required />
+            {% comment %} <div class="form-input" id="email"> {% endcomment %}
+              {{form.email}}
+            {% comment %} </div> {% endcomment %}
           </div>
           <div class="form-group">
             <label for="password">Mật khẩu</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Mật khẩu"
-              required
-            />
+            {% comment %} <div class="form-input" id="password"> {% endcomment %}
+              {{form.password1}}
+            {% comment %} </div> {% endcomment %}
           </div>
           <div class="form-group">
             <label for="confirm-password">Xác nhận mật khẩu</label>
-            <input
-              type="password"
-              id="confirm-password"
-              placeholder="Xác nhận mật khẩu"
-              required
-            />
+            {% comment %} <div class="form-input" id="confirm-password"> {% endcomment %}
+              {{form.password2}}
+            {% comment %} </div> {% endcomment %}
           </div>
-          <div class="buttons">
-            <button type="button" class="login">Đăng nhập</button>
+          <div class="buttons signup">
+            <button type="button" class="login"><a href="signin/">Đăng nhập</a></button>
             <button type="submit" class="register">Đăng ký</button>
           </div>
         </form>
