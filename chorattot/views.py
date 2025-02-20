@@ -3,6 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import *
 
 # Create your views here.
+def home(request):
+  return render(request, "home.html")
 
 def signup(request):
     form = CreateUserForm()
@@ -25,3 +27,5 @@ def newPassword(request):
 
 def changePassword(request):
     return render(request, 'changePassword.html')
+def posting(request):
+  return render(request, "posting.html")
