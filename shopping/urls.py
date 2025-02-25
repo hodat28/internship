@@ -16,12 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from chorattot.views import home, posting
+from chorattot import views
 
 
 urlpatterns = [
+    path("", views.home, name="home"),
     path('admin/', admin.site.urls),
-    path('', include('chorattot.urls')),
-    path("", home, name="home"),
-    path("posting", posting, name="posting"),
+    path("posting", views.posting, name="posting"),
+    path('signup/', views.signup),
+    path('signin/', views.signin),
+    path('forgotPassword/', views.forgotPassword),
+    path('newPassword/', views.newPassword),
+    path('changePassword/', views.changePassword),
 ]

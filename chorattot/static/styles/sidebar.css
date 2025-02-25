@@ -70,7 +70,7 @@
 }
 
 .sidebar .toggle-sidebar {
-  position: fixed;   
+  position: fixed;
   left: 185px;
   top: 30%;
   background-color: var(--green);
@@ -99,10 +99,9 @@
   body {
     margin: 0;
   }
-
 }
 
-@media (max-height: 380px) { 
+@media (max-height: 380px) {
   .sidebar {
     max-height: 400px;
     overflow-y: auto;
@@ -123,6 +122,107 @@
   .sidebar::-webkit-scrollbar-track {
     background: #f0f0f0; /* Màu nền của track */
   }
+}
 
+.chat-box {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  height: 400px;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
 
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-bottom: 1px solid #ccc;
+}
+
+.chat-conversations,
+.chat-messages {
+  padding: 10px;
+  overflow-y: auto;
+  height: calc(100% - 50px);
+}
+
+.chat-input {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.chat-input button {
+  margin-left: 5px;
+  padding: 5px 10px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* Responsive styles for popular mobile devices */
+@media (max-width: 375px) {
+  /* iPhone SE */
+  .chat-box {
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+@media (max-width: 414px) {
+  /* iPhone 11 Pro */
+  .chat-box {
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+@media (max-width: 360px) {
+  /* Samsung Galaxy S10 */
+  .chat-box {
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+@media (max-width: 412px) {
+  /* Google Pixel 4 */
+  .chat-box {
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+@media (max-width: 375px) {
+  /* iPhone X */
+  .chat-box {
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    right: 0;
+  }
 }

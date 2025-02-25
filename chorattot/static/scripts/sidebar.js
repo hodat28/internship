@@ -12,21 +12,83 @@ function updateTogglePosition(px = sidebar.width - 10) {
 }
 
 toggleButton.addEventListener("click", () => {
-    isExpanded = !isExpanded;
-    
-    if (!isExpanded) {
-      document.querySelectorAll(".sidebar .text").forEach(text => text.style.display = 'none');
-      sidebar.classList.add("sidebar-collapse");
-      logo.style.width = "50px";
-      toggleButton.innerHTML = expandLink;
-      updateTogglePosition(45);
-    } else {
-      document.querySelectorAll(".sidebar .text").forEach(text => text.style.display = 'block');
-      sidebar.classList.remove("sidebar-collapse");
-      logo.style.width = "100px";
-      toggleButton.innerHTML = collapseLink;
-      updateTogglePosition(185);
-    }    
+  isExpanded = !isExpanded;
+
+  if (!isExpanded) {
+    document.querySelectorAll(".sidebar .text").forEach(text => text.style.display = 'none');
+    sidebar.classList.add("sidebar-collapse");
+    logo.style.width = "50px";
+    toggleButton.innerHTML = expandLink;
+    updateTogglePosition(45);
+  } else {
+    document.querySelectorAll(".sidebar .text").forEach(text => text.style.display = 'block');
+    sidebar.classList.remove("sidebar-collapse");
+    logo.style.width = "100px";
+    toggleButton.innerHTML = collapseLink;
+    updateTogglePosition(185);
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const chatLink = document.getElementById('chat-link');
+  const chatBox = $('#chat-box');
+  const conversationList = document.getElementById('conversation-list');
+  const messageList = document.getElementById('message-list');
+  const chatInput = document.getElementById('chat-input');
+  const sendMessage = document.getElementById('send-message');
+
+  chatLink.addEventListener('click', function (event) {
+    event.preventDefault();
+    chatBox.modal('show');
+    loadConversations();
+  });
+
+  function loadConversations() {
+    // Fetch conversations from the server (this is just a placeholder)
+    const conversations = [
+      { id: 1, name: 'Cuộc hội thoại 1' },
+      { id: 2, name: 'Cuộc hội thoại 2' },
+    ];
+
+    conversationList.innerHTML = '';
+    conversations.forEach(conversation => {
+      const li = document.createElement('li');
+      li.className = 'list-group-item';
+      li.textContent = conversation.name;
+      li.addEventListener('click', function () {
+        loadMessages(conversation.id);
+      });
+      conversationList.appendChild(li);
+    });
+  }
+
+  function loadMessages(conversationId) {
+    // Fetch messages from the server (this is just a placeholder)
+    const messages = [
+      { sender: 'User', text: 'Hello' },
+      { sender: 'Other', text: 'Hi there' },
+    ];
+
+    messageList.innerHTML = '';
+    messages.forEach(message => {
+      const div = document.createElement('div');
+      div.className = 'list-group-item';
+      div.textContent = `${message.sender}: ${message.text}`;
+      messageList.appendChild(div);
+    });
+  }
+
+  sendMessage.addEventListener('click', function () {
+    const messageText = chatInput.value;
+    if (messageText.trim() !== '') {
+      // Send message to the server (this is just a placeholder)
+      const div = document.createElement('div');
+      div.className = 'list-group-item';
+      div.textContent = `You: ${messageText}`;
+      messageList.appendChild(div);
+      chatInput.value = '';
+    }
+  });
 });
 
 // Cập nhật vị trí nút toggle sau khi trang load
