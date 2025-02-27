@@ -3,106 +3,72 @@
 {% block title %}Đăng bán{% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'styles/posting.css' %}">
-{% endblock %}
-
-
-{% block scripts %}
-    <script src="{% static 'scripts/posting.js' %}" defer></script>
+  <link rel="stylesheet" href="{% static 'styles/posting.css' %}">
+  <script src="{% static 'scripts/posting.js' %}" type="module" defer></script>
 {% endblock %}
 
 {% block content %}
-  <h2>Đăng bán sản phẩm</h2>
-  <form class="upload-post" enctype="multipart/form-data" novalidate>
-    <div class="input-container">
-      <label for="title">Tiêu đề</label>
-      <input type="text" id="title" name="title" placeholder="Tiêu đề (tối đa 50 kí tự)" maxlength="50" minlength="2" required/>
-      <div class="error"></div>
-    </div>
-
-    <div class="row">
-      <div class="input-container">
-        <label for="category">Danh mục sản phẩm</label>
-        <select id="category" name="category">
-          <option value="electronics">Đồ điện tử</option>
-          <option value="fashion">Thời trang</option>
+  <div class="container mt-5">
+    <form class="row g-3 border p-3 rounded upload-post" novalidate>
+      <div class="col-12 form-floating">
+        <input type="text" class="form-control" id="title" placeholder="Tiêu đề" required maxlength="100" minlength="5">
+        <label class="ms-2" for="title">Tiêu đề <span class="text-danger">*</span></label>
+        <div class="invalid-feedback">Vui lòng nhập tiêu đề, ít nhất 5 kí tự và tối đa 100 kí tự!</div>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select class="form-select" id="category" aria-label="Danh mục sản phẩm" required></select>
+        <label for="category" class="ms-2">Danh mục sản phẩm <span class="text-danger">*</span></label>
+        <div class="invalid-feedback">Vui lòng chọn danh mục sản phẩm!</div>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select class="form-select" id="status" aria-label="Tình trạng sản phẩm" required>
+          <option value="new" selected>Mới</option>
+          <option value="old">Đã qua sử dụng</option>
         </select>
+        <label for="status" class="ms-2">Tình trạng sản phẩm <span class="text-danger">*</span></label>
       </div>
-  
-      <div class="input-container">
-        <label for="price">Giá</label>
-        <input type="number" id="price" name="price" required min="10000" placeholder="Giá"/>
-        <div class="error"></div>
-      </div>  
-    </div>
-
-    <div class="input-container">
-      <label for="product-name">Tên sản phẩm</label>
-      <input type="text" id="product-name" name="product-name" required placeholder="Tên sản phẩm" minlength="2"/>
-      <div class="error"></div>
-    </div>
-
-    <div class="input-container">
-      <label for="condition">Tình trạng</label>
-      <select id="condition" name="condition">
-        <option value="new">Mới</option>
-        <option value="used">Đã qua sử dụng</option>
-      </select>
-    </div>
-
-    <div class="input-container">
-      <label for="description">Mô tả</label>
-      <textarea id="description" name="description" required maxlength="300" minlength="10" placeholder="Mô tả (tối đa 300 kí tự)"></textarea>
-      <div class="error"></div>
-    </div>
-
-    <div class="input-container">
-      <label>Ảnh (tối đa 6 ảnh)</label>
-      <input type="file" id="image-input" accept="image/*" multiple>
-      <div id="image-container"></div>
-      <div class="error"></div>
-      <button id="add-more-btn" type="button">+</button>
-
-      <input type="file" id="hidden-file-input" accept="image/*" multiple>
-    </div>
-
-    <div class="input-container">
-      <label for="select-address">Địa chỉ</label>
-      <div id="select-address"readonly>Chọn địa chỉ</div>
-      <div class="error"></div>
-    </div>
-
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Địa chỉ</h2>
-      <div class="input-container">
-        <label for="select-city">Tỉnh/thành phố</label>
-        <select id="select-city">
-          <option value="0">Vui lòng chọn tỉnh/thành phố</option>
-        </select>
+      <div class="col-md-4 form-floating">
+        <input type="number" class="form-control" id="price" min=10000 required placeholder="10000">
+        <label for="price" class="ms-2">Giá <span class="text-danger">*</span></label>
+        <div class="invalid-feedback">Vui lòng nhập giá bán sản phẩm, thấp nhất là 10,000 đ!</div>
       </div>
-    
-      <div class="input-container">
-        <label for="select-district">Quận/huyện</label>
-        <select id="select-district" disabled></select>
+      <div class="col-12 form-floating">
+        <input type="text" class="form-control" id="product-name" placeholder="Tên sản phẩm" required minlength="2" maxlength="100">
+        <label for="product-name" class="ms-2">Tên sản phẩm <span class="text-danger">*</span></label>
+        <div class="invalid-feedback">Vui lòng nhập tên sản phẩm, tối đa 100 kí tự!</div>
       </div>
-      
-      <div class="input-container">
-        <label for="select-ward">Phường/xã</label>
-        <select id="select-ward" disabled></select>
+      <div class="col-12 form-floating">
+        <textarea class="form-control" placeholder="Mô tả sản phẩm" id="description" required minlength="10" maxlength="300" style="height: 150px; resize: none"></textarea>
+        <label for="description" class="ms-2">Mô tả <span class="text-danger">*</span></label>
+        <div class="invalid-feedback">Vui lòng nhập mô tả, ít nhất 10 kí tự và tối đa 300 kí tự!</div>
       </div>
-      
-      <div class="input-container">
-        <label for="street" class="not-require">Số nhà</label>
-        <input id="street" type="text" placeholder="Số nhà">
+      <div class="col-12 images">
+        <label for="image-input" class="form-label">Ảnh (tối đa 6 ảnh) <span class="text-danger">*</span></label>
+        <input class="form-control" type="file" id="image-input" multiple required accept="image/*">
+        <div class="invalid-feedback">Vui lòng chọn ít nhất 2 ảnh!</div>
+        <button id="add-more-btn" type="button" class="btn btn-secondary d-none">+</button>
+        <input type="file" id="hidden-file-input" class="d-none" accept="image/*" multiple>
+        <div id="image-container" class="d-flex mt-3"></div>
       </div>
-
-      <button id="close-modal" class>XONG</button>
-    </div>
+      <div class="col-md-3 form-floating">
+        <select class="form-select city-select" id="city" aria-label="Tỉnh/Thành phố" required></select>
+        <label for="city" class="ms-2">Tỉnh/Thành phố <span class="text-danger">*</span></label>
+      </div>
+      <div class="col-md-3 form-floating">
+        <select class="form-select district-select" id="district" aria-label="Quận/Huyện" required></select>
+        <label for="district" class="ms-2">Quận/Huyện <span class="text-danger">*</span></label>
+      </div>
+      <div class="col-md-3 form-floating">
+        <select class="form-select ward-select" id="ward" aria-label="Phường/Xã" required></select>
+        <label for="ward" class="ms-2">Phường/Xã <span class="text-danger">*</span></label>
+      </div>
+      <div class="col-md-3 form-floating">
+        <input type="text" class="form-control" id="street" placeholder="Địa chỉ cụ thể">
+        <label class="ms-2" for="street">Địa chỉ cụ thể</label>
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary float-end">Đăng tin</button>
+      </div>
+    </form>
   </div>
-
-    <button type="submit" class="post-btn">Đăng bán</button>
-  </form>
-
 {% endblock %}
