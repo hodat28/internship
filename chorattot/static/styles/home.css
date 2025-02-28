@@ -1,219 +1,27 @@
-.content-container .post {
-  display: flex;
-  flex-direction: column;
-  color: black;
-  gap: 10px;
-  margin-bottom: 20px;
+.card {
+  height: 350px;
+  width: 200px;
+  transition: all 0.3s;
 }
 
-.post .content {
-  padding: 10px 20px;         
-  border-radius: 10px;
-  border: 3px solid var(--green);
+.card:hover {
+  transform: scale(1.15);
 }
 
-.post .top .left-side {
-  display: flex;
-  text-decoration: none;
-  /* justify-content: start; */
-  align-items: center;
-  color: black;
-}
-
-.post .top .right-side {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-}
-
-.post .top {
-  margin-bottom: 5px;
-}
-
-.post .top,
-.post .bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.post .bottom {
-  gap: 5px;
-}
-
-.post .avatar {
-  display: flex;
-  align-items: start;
-  justify-content: flex-start;
-}
-
-.post .avatar * {
-  width: 50px;
-  height: 50px;
-}
-
-.post .interact {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.post .interact button {
-  width: 50%;
-  padding: 5px 20px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.post .interact .message {
-  background-color: var(--green);
-  color: white;
-}
-
-.post .interact .share {
-  color: var(--green);
-}
-
-.post .seller .name {
-  font-weight: bold;
-  font-size: 1em;
-}
-
-.post .seller .address,
-.post .right-side .date,
-.post .post-status {
-  font-style: italic;
-  font-size: 0.75em;
-}
-
-.post .product {
-  max-width: 50%;
-}
-
-.post .product .name {
-  font-size: 1.2em;
-}
-
-.post .product .name,
-.post .product .price {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.post .product .price {
-  color: red;
-}
-
-.post .product .product-status {
-  margin-right: 5px;
-}
-
-.post .product .product-status,
-.post .category {
-  background-color: #dddfe0;
-  color: #667085;
-  font-size: 0.75em;
-  padding: 3px;
-  font-weight: normal;
-}
-
-.post .title {
-  font-weight: bold;
-}
-
-.post .product .desc {
-  text-decoration: none;
-  margin: 0;
-}
-
-.post .product .desc li {
-  font-size: 0.9em;
-}
-
-.post .bottom .images {
-  max-width: 50%;
-  flex: 1;
-  position: relative;
-}
-
-.post .bottom .images img {
+.card-img-top {
+  width: 200px;
+  height: 200px;
   object-fit: cover;
-  width: 100%;
-  height: 100%;
-  /* max-width: 100%; */
-  max-height: 300px;
 }
 
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  padding: 16px;
-  margin-top: -22px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
+.card-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;  
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-.prev:hover, .next:hover {
-  background-color: #f1f1f1;
-  color: black;
-}
-
-.fade {
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
-}
-
-button:hover, a:hover {
-  opacity: 0.7;
-}
-
-.post .post-status {
-  background-color: var(--green);
-  color: white;
-  padding: 3px;
-}
-
-@media (max-width: 768px) {
-  .post .content .bottom {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .post .bottom .images {
-    max-width: 100%;
-    justify-content: start;
-    align-self: stretch;
-  }
-
-  .post .product {
-    max-width: 100%;
-  }
-
-  .post .product .desc {
-    margin-bottom: 5px;
-  }
-
-  .post .content .top {
-    flex-direction: column;
-  }
-
+.time-address {
+  font-size: 10px;
 }
