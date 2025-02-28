@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-l7i44m7g5eebvt8z)e5!l7!i9sg7%v29%v2mlde7++@4jd%mu%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -55,7 +55,7 @@ ROOT_URLCONF = 'shopping.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "chorattot/templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
