@@ -1,106 +1,94 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
-<html lang="vi">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Chợ rất tốt</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"
-      rel="stylesheet"
-    />
-    {% load static %}
-  </head>
-  <body>
-    <section class="vh-100">
-      <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-            <div class="card text-black-100" style="border-radius: 1rem">
-              <div class="w-100 py-5">
-                <img
-                  class="rounded mx-auto d-block"
-                  src="{% static 'images/logo.png' %}"
-                  alt="Logo"
+{% extends 'base.html' %} {% load static %} {% block title %}Chợ rất tốt
+{%endblock %} {% block head %}
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+  crossorigin="anonymous"
+/>
+<link
+  href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"
+  rel="stylesheet"
+/>
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+  crossorigin="anonymous"
+></script>
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+{% endblock %} {% block content %}
+<section class="vh-75">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card text-black-100" style="border-radius: 1rem">
+          <div class="w-100 py-5">
+            <img
+              class="rounded mx-auto d-block"
+              src="{% static 'images/logo.png' %}"
+              alt="Logo"
+            />
+          </div>
+          <div class="card-body p-5 pt-0 text-left">
+            <div class="md-5 mt-md-4 pb-5">
+              <h2 class="fw-bold mb-4 text-uppercase">Đăng ký</h2>
+              <div data-mdb-input-init class="form-outline form-white mb-4">
+                <input
+                  type="email"
+                  id="user_email"
+                  class="form-control form-control-lg text-black-50 fs-6"
+                  placeholder="Email"
                 />
               </div>
-              <div class="card-body p-5 pt-0 text-left">
-                <div class="md-5 mt-md-4 pb-5">
-                  <h2 class="fw-bold mb-4 text-uppercase">Đăng ký</h2>
-                  <div data-mdb-input-init class="form-outline form-white mb-4">
-                    <input
-                      type="email"
-                      id="user_email"
-                      class="form-control form-control-lg text-black-50 fs-6"
-                      placeholder="Email"
-                    />
-                  </div>
-                  <div data-mdb-input-init class="form-outline form-white mb-4">
-                    <input
-                      type="phone"
-                      id="user_phone"
-                      class="form-control form-control-lg text-black-50 fs-6"
-                      placeholder="Số điện thoại"
-                    />
-                  </div>
-
-                  <div data-mdb-input-init class="form-outline form-white mb-4">
-                    <input
-                      type="password"
-                      id="user_password1"
-                      class="form-control form-control-lg text-black-50 fs-6"
-                      placeholder="Mật khẩu"
-                    />
-                  </div>
-
-                  <div data-mdb-input-init class="form-outline form-white mb-4">
-                    <input
-                      type="password"
-                      id="user_password2"
-                      class="form-control form-control-lg text-black-50 fs-6"
-                      placeholder="Xác nhận mật khẩu"
-                    />
-                  </div>
-
-                  <button
-                    data-mdb-button-init
-                    data-mdb-ripple-init
-                    class="btn btn-primary rounded w-100 px-5"
-                    style="background-color: #0047ab"
-                    type="submit"
-                  >
-                    Đăng ký
-                  </button>
-                </div>
-                <div>
-                  <p class="mb-0">
-                    Đã có tài khoản?
-                    <a href="/login" class="text-black-50 fw-bold"
-                      >Đăng nhập ngay!</a
-                    >
-                  </p>
-                </div>
+              <div data-mdb-input-init class="form-outline form-white mb-4">
+                <input
+                  type="phone"
+                  id="user_phone"
+                  class="form-control form-control-lg text-black-50 fs-6"
+                  placeholder="Số điện thoại"
+                />
               </div>
+
+              <div data-mdb-input-init class="form-outline form-white mb-4">
+                <input
+                  type="password"
+                  id="user_password1"
+                  class="form-control form-control-lg text-black-50 fs-6"
+                  placeholder="Mật khẩu"
+                />
+              </div>
+
+              <div data-mdb-input-init class="form-outline form-white mb-4">
+                <input
+                  type="password"
+                  id="user_password2"
+                  class="form-control form-control-lg text-black-50 fs-6"
+                  placeholder="Xác nhận mật khẩu"
+                />
+              </div>
+
+              <button
+                data-mdb-button-init
+                data-mdb-ripple-init
+                class="btn btn-primary rounded w-100 px-5"
+                style="background-color: #0047ab"
+                type="submit"
+              >
+                Đăng ký
+              </button>
+            </div>
+            <div>
+              <p class="mb-0">
+                Đã có tài khoản?
+                <a href="/login" class="text-black-50 fw-bold"
+                  >Đăng nhập ngay!</a
+                >
+              </p>
             </div>
           </div>
         </div>
       </div>
-    </section>
-  </body>
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"
-  ></script>
-</html>
+    </div>
+  </div>
+</section>
+{% endblock %}
