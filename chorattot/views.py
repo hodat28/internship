@@ -28,4 +28,6 @@ def newPassword(request):
 def changePassword(request):
     return render(request, 'changePassword.html')
 def posting(request):
-  return render(request, "posting.html")
+    return render(request, "posting.html")
+def profile(request):
+    return render(request, "profile.html")
