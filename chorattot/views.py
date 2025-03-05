@@ -27,7 +27,12 @@ def newPassword(request):
 
 def changePassword(request):
     return render(request, 'changePassword.html')
+
 def posting(request):
     return render(request, "posting.html")
+
 def profile(request):
     return render(request, "profile.html")
+
+def productDetail(request, product_id):
+    return render(request, "productDetail.html", {'product_id': product_id})
