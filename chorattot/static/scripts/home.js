@@ -27,7 +27,7 @@ async function loadPosts() {
                         <p class="card-text text-danger price">${data.price} đ</p>
                         <div class="card-text time-address text-secondary d-flex justify-content-between">
                         <span class="time">${relativeTimeFromNow(data.created_at)}</span>
-                        <span class="address text-truncate">&#x2022;${data.location}</span>
+                        <span class="address text-truncate">&#x2022;${getCity(data.location)}</span>
                         </div>
                     </div>
                     </div>
@@ -38,6 +38,19 @@ async function loadPosts() {
         console.error(error.message);
         postContainer.innerHTML = "<h2>Không tìm thấy tin mới nhất!</h2>";
     }
+}
+
+function getCity(location) {
+    const cityIndex = location.lastIndexOf("Thành phố");
+    const provinceIndex = location.lastIndexOf("Tỉnh");
+        
+    if (cityIndex !== -1 ) {
+        return location.substring(cityIndex + 10);
+    }
+    else if (provinceIndex !== -1) {
+        return location.substring(provinceIndex + 5);
+    }
+    return location;
 }
 
 displayCarousel();
