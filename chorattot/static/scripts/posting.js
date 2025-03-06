@@ -1,4 +1,5 @@
 import { getCategoryList } from "./navbar.js";
+import serverUrl from "./config.js";
 
 const categoryContainer = document.querySelector("#category");
 const titleInput = document.querySelector("#title");
@@ -8,6 +9,7 @@ const descInput = document.querySelector("#description");
 const citySelect = document.querySelector(".city-select");
 const districtSelect = document.querySelector(".district-select");
 const wardSelect = document.querySelector(".ward-select");
+const street = document.querySelector("#street");
 const form = document.querySelector(".upload-post");
 const MAX_IMAGES = 6; // Giới hạn tối đa số ảnh
 const imageInput = document.getElementById("image-input");
@@ -16,8 +18,26 @@ const addMoreButton = document.getElementById("add-more-btn");
 const hiddenFileInput = document.getElementById("hidden-file-input");
 let selectedFiles = new Set(); // Lưu danh sách file đã chọn
 
-loadCategory();
-loadProvince();
+let districtList = [];
+let wardList = [];     
+init();
+
+async function init() {
+  const spinner = document.getElementById("loading-spinner");
+  spinner.classList.remove("d-none");
+
+  try {
+      loadCategory();
+      await loadCity();
+      [districtList, wardList] = await Promise.all([getDistrict(), getWard()]);
+      loadDistrict();
+  } catch (error) {
+      console.error("Lỗi khi tải dữ liệu:", error);
+  } finally {
+      // Ẩn Spinner khi hoàn thành
+      spinner.classList.add("d-none");
+  }
+}
 
 citySelect.addEventListener("change", () => {
   loadDistrict(citySelect.value);
@@ -32,12 +52,14 @@ async function loadCategory() {
   categories.forEach((category) => {
     categoryContainer.innerHTML += 
       `
-        <option value="${category}">${category}</option>
+        <option value="${category.id}">${category.name}</option>
       `;
   });
 }
 
-form.addEventListener("submit", e => {
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
   const validName = validateName();
   const validPrice = validatePrice();
   const validTitle = validateTitle();
@@ -45,8 +67,49 @@ form.addEventListener("submit", e => {
   const validImages = validateImages();
 
   if (!validName || !validPrice || !validTitle || !validDesc || !validImages) {
-    e.preventDefault();
+    return;
   }
+
+  const formData = new FormData();
+  const address = street.value.trim().length > 0 ? `${street.value}, ` : '' 
+    + `${wardSelect.options[wardSelect.selectedIndex].text}, ${districtSelect.options[districtSelect.selectedIndex].text}, ${citySelect.options[citySelect.selectedIndex].text}`;
+
+  console.log(document.querySelector("#status").value);
+
+  formData.append("category_id", categoryContainer.value);
+  formData.append("title", titleInput.value.trim());
+  formData.append("price", priceInput.value);
+  formData.append("product_name", nameInput.value.trim());
+  formData.append("product_status", document.querySelector("#status").value);
+  formData.append("description", descInput.value.trim());
+  formData.append("location", address);
+  formData.append("user_id", "1");
+
+  console.log(selectedFiles);
+
+  selectedFiles.forEach((file) => {
+    formData.append("images", file);
+  });
+
+  try {
+    const response = await fetch(`${serverUrl}/post`, {
+      method: "POST",
+      body: formData,
+    });
+    
+    // const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error("Lỗi khi gửi dữ liệu");
+    }
+
+    window.location.href = "http://localhost:8000";
+
+  } catch (error) {
+    console.error("Lỗi khi gửi dữ liệu:", error);
+    alert("Có lỗi xảy ra, vui lòng thử lại!");
+  }
+  
 });
 
 titleInput.addEventListener("change", validateTitle);
@@ -54,7 +117,7 @@ nameInput.addEventListener("change", validateName);
 descInput.addEventListener("change", validateDesc);
 priceInput.addEventListener("change", validatePrice);
 
-async function loadProvince() {
+async function loadCity() {
   const url = "https://provinces.open-api.vn/api";
   try {
     const response = await fetch(url);
@@ -65,16 +128,14 @@ async function loadProvince() {
     json.forEach((element) => {
       citySelect.innerHTML += `<option value="${element.code}">${element.name}</option>`;
     });
-    await loadDistrict(citySelect.value);
   } catch (error) {
     console.error(error.message);
-    alert("Lỗi không thể lấy danh sách tỉnh/thành phố!");
+    console.error("Lỗi không thể lấy danh sách tỉnh/thành phố!");
   }
 }
 
-async function loadDistrict(provinceCode) {
+async function getDistrict() {
   const url = "https://provinces.open-api.vn/api/d/";
-  districtSelect.innerHTML = "";
 
   try {
     const response = await fetch(url);
@@ -82,37 +143,46 @@ async function loadDistrict(provinceCode) {
       throw new Error(`Response status: ${response.status}`);
     }
     const json = await response.json();
-    json
-      .filter((p) => p.province_code == provinceCode)
-      .forEach((element) => {
-        districtSelect.innerHTML += `<option value="${element.code}">${element.name}</option>`;
-      });
-    await loadWard(districtSelect.value)
+    return json;
   } catch (error) {
     console.error(error.message);
-    alert("Lỗi không thể lấy danh sách quận/huyện!");
+    console.error("Lỗi không thể lấy danh sách quận/huyện!");
   }
+};
+
+async function getWard() {
+  const url = "https://provinces.open-api.vn/api/w/";
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.error(error.message);
+    console.error("Lỗi không thể lấy danh sách quận/huyện!");
+  }
+};
+
+function loadDistrict(provinceCode = citySelect.value) {
+  districtSelect.innerHTML = "";
+  districtList
+    .filter((p) => p.province_code == provinceCode)
+    .forEach((element) => {
+      districtSelect.innerHTML += `<option value="${element.code}">${element.name}</option>`;
+    });
+  loadWard(districtSelect.value)
 }
 
 async function loadWard(districtCode) {
-  const url = "https://provinces.open-api.vn/api/w/";
-  wardSelect.innerHTML = "";
-
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-    const json = await response.json();
-    json
-      .filter((p) => p.district_code == districtCode)
-      .forEach((element) => {
-        wardSelect.innerHTML += `<option value="${element.code}">${element.name}</option>`;
-      });
-  } catch (error) {
-    console.error(error.message);
-    alert("Lỗi không thể lấy danh sách phường/xã!");
-  }
+  wardSelect.innerHTML = "";  
+  wardList
+    .filter((w) => w.district_code == districtCode)
+    .forEach((element) => {
+      wardSelect.innerHTML += `<option value="${element.code}">${element.name}</option>`;
+    });
 }
 
 function validateTitle() {
@@ -164,20 +234,21 @@ function validateImages() {
 function handleFiles(files) {
   let newFilesAdded = false;
   let currentImageCount = imageContainer.children.length;
-  let filesToProcess = Array.from(files).slice(0, MAX_IMAGES - currentImageCount); // Chỉ lấy số lượng vừa đủ
+  let filesToProcess = Array.from(files).slice(0, MAX_IMAGES - currentImageCount); // Chỉ lấy số lượng file còn thiếu
 
   for (const file of filesToProcess) {
     if (!file.type.startsWith("image/")) continue; // Chỉ nhận file ảnh
-    const fileKey = file.name + file.size; // Tạo key duy nhất cho file
-    if (selectedFiles.has(fileKey)) continue; // Bỏ qua file đã chọn
 
-    selectedFiles.add(fileKey);
+    const fileKey = file.name + file.size; // Key duy nhất cho file
+    if (selectedFiles.has(fileKey)) continue; // Bỏ qua file đã chọn trước đó
+
+    selectedFiles.add(file); // Lưu trực tiếp file vào Set
     newFilesAdded = true;
 
     const reader = new FileReader();
     reader.onload = function(e) {
       const imageWrapper = document.createElement("div");
-      imageWrapper.classList.add("image-wrapper", "me-3");
+      imageWrapper.classList.add("image-wrapper", "me-3", "position-relative");
 
       const img = document.createElement("img");
       img.src = e.target.result;
@@ -185,16 +256,17 @@ function handleFiles(files) {
 
       const removeBtn = document.createElement("button");
       removeBtn.innerText = "×";
-      removeBtn.classList.add("remove-btn", "btn", "btn-danger", "position-absolute", "top-0", "right-0", "z-1", "p-0");
-      removeBtn.addEventListener("click", function() {
-          imageWrapper.remove();
-          selectedFiles.delete(fileKey); // Xóa file khỏi danh sách đã chọn
-          updateUI(); // Cập nhật lại giao diện sau khi xóa ảnh
-          validateImages();
+      removeBtn.classList.add("remove-btn", "btn", "btn-danger", "position-absolute", "top-0", "end-0", "p-1");
+
+      removeBtn.addEventListener("click", () => {
+        imageWrapper.remove();
+        selectedFiles.delete(file);
+        updateUI(); // Cập nhật lại giao diện sau khi xóa ảnh
+        validateImages();
       });
 
-      imageWrapper.appendChild(removeBtn);
       imageWrapper.appendChild(img);
+      imageWrapper.appendChild(removeBtn);
       imageContainer.appendChild(imageWrapper);
       updateUI();
     };
