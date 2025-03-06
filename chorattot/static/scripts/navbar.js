@@ -11,7 +11,7 @@ export async function getCategoryList() {
     return json;
   } catch (error) {
     console.error(error.message);
-    alert("Lỗi không thể lấy danh mục!");
+    // alert("Lỗi không thể lấy danh mục!");
   }
 }
 

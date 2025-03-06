@@ -42,9 +42,22 @@
             <span>Tài khoản</span>
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Đăng nhập/Đăng kí</a></li>
+            {% if token %}
+            <li>
+              <a class="dropdown-item" href="{% url 'home' %}">Hồ sơ</a>
+            </li>
             <li><a class="dropdown-item" href="#">Đơn mua</a></li>
             <li><a class="dropdown-item" href="#">Đã lưu</a></li>
+            <li>
+              <a class="dropdown-item text-black-50" href="{% url 'logout' %}">Đăng xuất</a>
+            </li>
+            {% else %}
+            <li>
+              <a class="dropdown-item" id="login" href="{% url 'login' %}">Đăng nhập/Đăng ký</a>
+            </li>
+            <li><a class="dropdown-item" href="#">Đơn mua</a></li>
+            <li><a class="dropdown-item" href="#">Đã lưu</a></li>
+            {% endif %}
           </ul>
         </li>
         <li class="nav-item">

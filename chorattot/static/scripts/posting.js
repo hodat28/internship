@@ -68,7 +68,7 @@ async function loadProvince() {
     await loadDistrict(citySelect.value);
   } catch (error) {
     console.error(error.message);
-    alert("Lỗi không thể lấy danh sách tỉnh/thành phố!");
+    // alert("Lỗi không thể lấy danh sách tỉnh/thành phố!");
   }
 }
 
@@ -90,7 +90,7 @@ async function loadDistrict(provinceCode) {
     await loadWard(districtSelect.value)
   } catch (error) {
     console.error(error.message);
-    alert("Lỗi không thể lấy danh sách quận/huyện!");
+    // alert("Lỗi không thể lấy danh sách quận/huyện!");
   }
 }
 
@@ -111,7 +111,7 @@ async function loadWard(districtCode) {
       });
   } catch (error) {
     console.error(error.message);
-    alert("Lỗi không thể lấy danh sách phường/xã!");
+    // alert("Lỗi không thể lấy danh sách phường/xã!");
   }
 }
 

@@ -17,15 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from chorattot import views
-
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path("", views.home, name="home"),
     path('admin/', admin.site.urls),
     path("posting", views.posting, name="posting"),
-    path('register/', views.register),
-    path('login/', views.login),
-    path('forgotPassword/', views.forgotPassword),
-    path('newPassword/', views.newPassword),
-    path('changePassword/', views.changePassword),
+    path('register/', views.register, name="register"),
+    path('login/', views.login, name="login"),
+    path('logout/', views.logout, name="logout"),
+    path('forgotPassword/', views.forgotPassword, name="forgotPassword"),
+    path('newPassword/', views.newPassword, name="newPassword"),
+    path('changePassword/', views.changePassword, name="changePassword"),
 ]
