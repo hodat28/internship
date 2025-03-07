@@ -1,0 +1,5 @@
+export function relativeTimeFromNow(isoString) {
+  const DateTime = luxon.DateTime;
+  const dateTime = DateTime.fromISO(isoString, { zone: "utc" });
+  return dateTime.toRelative({ locale: "vi" });
+}

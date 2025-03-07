@@ -22,11 +22,12 @@ from chorattot import views
 urlpatterns = [
     path("", views.home, name="home"),
     path('admin/', admin.site.urls),
-    path("posting", views.posting, name="posting"),
+    path("posting/", views.posting, name="posting"),
     path('register/', views.register),
     path('login/', views.login),
     path('forgotPassword/', views.forgotPassword),
     path('newPassword/', views.newPassword),
     path('changePassword/', views.changePassword),
     path('profile/', views.profile, name="profile"),
+    path('product/detail/<int:product_id>', views.productDetail, name="product_detail"),
 ]
