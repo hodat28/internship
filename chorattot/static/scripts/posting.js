@@ -130,7 +130,7 @@ async function loadCity() {
     });
   } catch (error) {
     console.error(error.message);
-    console.error("Lỗi không thể lấy danh sách tỉnh/thành phố!");
+    // alert("Lỗi không thể lấy danh sách tỉnh/thành phố!");
   }
 }
 
@@ -146,7 +146,7 @@ async function getDistrict() {
     return json;
   } catch (error) {
     console.error(error.message);
-    console.error("Lỗi không thể lấy danh sách quận/huyện!");
+    // alert("Lỗi không thể lấy danh sách quận/huyện!");
   }
 };
 
@@ -162,27 +162,8 @@ async function getWard() {
     return json;
   } catch (error) {
     console.error(error.message);
-    console.error("Lỗi không thể lấy danh sách quận/huyện!");
+    // alert("Lỗi không thể lấy danh sách phường/xã!");
   }
-};
-
-function loadDistrict(provinceCode = citySelect.value) {
-  districtSelect.innerHTML = "";
-  districtList
-    .filter((p) => p.province_code == provinceCode)
-    .forEach((element) => {
-      districtSelect.innerHTML += `<option value="${element.code}">${element.name}</option>`;
-    });
-  loadWard(districtSelect.value)
-}
-
-async function loadWard(districtCode) {
-  wardSelect.innerHTML = "";  
-  wardList
-    .filter((w) => w.district_code == districtCode)
-    .forEach((element) => {
-      wardSelect.innerHTML += `<option value="${element.code}">${element.name}</option>`;
-    });
 }
 
 function validateTitle() {
