@@ -1,6 +1,6 @@
 import { displayCarousel } from "./carousel.js";
 import serverUrl from "./config.js";
-import { relativeTimeFromNow } from "./utils.js";
+import { relativeTimeFromNow, formatMoney } from "./utils.js";
 
 async function loadPosts() {
     const url = `${serverUrl}/post/newpost`;
@@ -24,7 +24,7 @@ async function loadPosts() {
                     <img src="${data.images.length > 0 && data.images[0].image_url}" class="card-img-top img-thumbnail" alt="product image">
                     <div class="card-body">
                         <h6 class="card-title">${data.title}</h6>
-                        <p class="card-text text-danger price">${data.price} đ</p>
+                        <p class="card-text text-danger price">${formatMoney(Number(data.price))} đ</p>
                         <div class="card-text time-address text-secondary d-flex justify-content-between">
                         <span class="time">${relativeTimeFromNow(data.created_at)}</span>
                         <span class="address text-truncate">&#x2022;${getCity(data.location)}</span>

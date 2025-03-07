@@ -1,5 +1,5 @@
 import serverUrl from "./config.js";
-import { relativeTimeFromNow } from "./utils.js";
+import { relativeTimeFromNow, formatMoney } from "./utils.js";
 
 const productId = document.querySelector(".product-id").innerText;
 let isPhoneDisplay = false;
@@ -25,7 +25,7 @@ async function loadDetail() {
     document.title = json.data.title;
     document.querySelector(".title").innerText = json.data.title;
     document.querySelector(".name").innerText = json.data.product_name;
-    document.querySelector(".price").innerText = json.data.price + " đ";
+    document.querySelector(".price").innerText = formatMoney(Number(json.data.price)) + " đ";
     document.querySelector(".category-status .category").innerText = json.data.Category.name;
     document.querySelector(".category-status .status").innerText = json.data.product_status;
     document.querySelector(".location").innerText = json.data.location;
