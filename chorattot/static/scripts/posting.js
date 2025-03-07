@@ -217,7 +217,7 @@ function validateName() {
     nameInput.nextElementSibling.nextElementSibling.classList.add("d-block");
     return false;
   }
-  priceInput.nextElementSibling.nextElementSibling.classList.remove("d-block");
+  nameInput.nextElementSibling.nextElementSibling.classList.remove("d-block");
   return true;
 }
 
