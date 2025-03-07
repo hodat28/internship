@@ -10,7 +10,7 @@ from django.conf import settings
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password
-
+from .models import User
 
 # Create your views here.
 def home(request):
@@ -22,28 +22,39 @@ def register(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         phone = request.POST.get('phone')
-        password1 = request.POST.get('password1')
-        password2 = request.POST.get('password2')
+        password = request.POST.get('password')
+        password_confirm = request.POST.get('password_confirm')
 
-        if password1 != password2:
-            messages.error(request, 'Passwords do not match')
+        if not email or not phone or not password or not password_confirm:
+            messages.error(request, 'Vui lòng điền đầy đủ thông tin')
             return render(request, 'register.html')
 
-        if not email or not phone or not password1:
-            messages.error(request, 'Missing required fields')
-            return render(request, 'register.html')
-
-        if User.objects.filter(email=email).exists():
-            messages.error(request, 'Email already exists')
+        if password != password_confirm:
+            messages.error(request, 'Mật khẩu không khớp')
             return render(request, 'register.html')
 
         user = User.objects.create(
             email=email,
-            username=email,  # Assuming username is the same as email
-            password=make_password(password1)
+            username=email,  # Ensure username is set to a unique value, such as the email
+            password=make_password(password)
         )
 
-        messages.success(request, 'User registered successfully')
+        # Save the phone number in the UserProfile
+        UserProfile.objects.create(user=user, phone=phone)
+
+        try:
+            response = requests.post(
+                f"{settings.EXTERNAL_API_URL}/api/signup",
+                data={'email': user.email, 'phone': phone, 'password': password},
+                verify=False  # Disable SSL verification
+            )
+            print(f"API response status code: {response.status_code}")
+            print(f"API response content: {response.content}")
+        except SSLError as e:
+            print(f"SSL error occurred: {e}")
+            messages.error(request, 'Đã xảy ra lỗi SSL. Vui lòng thử lại sau 5 - 10 phút nữa.')
+
+        messages.success(request, 'Đăng ký thành công')
         return redirect('login')
     else:
         return render(request, 'register.html')
@@ -78,13 +89,13 @@ def login(request):
                     return redirect('home')
                 else:
                     print("user is none, invalid email or password")
-                    messages.error(request, 'Invalid email or password.')
+                    messages.error(request, 'Mật khẩu hoặc email không chính xác.')
             except SSLError as e:
                 print(f"SSL error occurred: {e}")
-                messages.error(request, 'An SSL error occurred while trying to authenticate. Please try again later.')
+                messages.error(request, 'Đã xảy ra lỗi SSL. Vui lòng thử lại sau 5 - 10 phút nữa.')
         else:
             print("form is not valid")
-            messages.error(request, 'Invalid email or password.')
+            messages.error(request, 'Mật khẩu hoặc email không chính xác.')
     else:
         form = UserLoginForm()
     return render(request, 'login.html', {'form': form})
@@ -104,7 +115,6 @@ def newPassword(request):
 
 def changePassword(request):
     return render(request, 'changePassword.html')
-
 
 def posting(request):
     return render(request, "posting.html")
