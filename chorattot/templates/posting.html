@@ -8,11 +8,16 @@
 {% endblock %}
 
 {% block content %}
-  <div class="container mt-5">
+  <div class="container mt-5 position-relative">
+    <div id="loading-spinner" class="position-absolute top-50 start-50 translate-middle d-none z-3">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
     <form class="row g-3 border p-3 rounded upload-post" novalidate>
       <div class="col-12 form-floating">
         <input type="text" class="form-control" id="title" placeholder="Tiêu đề" required maxlength="100" minlength="5">
-        <label class="ms-2" for="title">Tiêu đề <span class="text-danger">*</span></label>
+        <label class="ms-2 text-secondary" for="title">Tiêu đề <span class="text-danger">*</span></label>
         <div class="invalid-feedback">Vui lòng nhập tiêu đề, ít nhất 5 kí tự và tối đa 100 kí tự!</div>
       </div>
       <div class="col-md-4 form-floating">
@@ -22,28 +27,29 @@
       </div>
       <div class="col-md-4 form-floating">
         <select class="form-select" id="status" aria-label="Tình trạng sản phẩm" required>
-          <option value="new" selected>Mới</option>
-          <option value="old">Đã qua sử dụng</option>
+          <option value="Mới" selected>Mới</option>
+          <option value="Mới 99%" selected>Mới 99%</option>
+          <option value="Đã qua sử dụng">Đã qua sử dụng</option>
         </select>
         <label for="status" class="ms-2">Tình trạng sản phẩm <span class="text-danger">*</span></label>
       </div>
       <div class="col-md-4 form-floating">
         <input type="number" class="form-control" id="price" min=10000 required placeholder="10000">
-        <label for="price" class="ms-2">Giá <span class="text-danger">*</span></label>
+        <label for="price" class="ms-2 text-secondary">Giá <span class="text-danger">*</span></label>
         <div class="invalid-feedback">Vui lòng nhập giá bán sản phẩm, thấp nhất là 10,000 đ!</div>
       </div>
       <div class="col-12 form-floating">
         <input type="text" class="form-control" id="product-name" placeholder="Tên sản phẩm" required minlength="2" maxlength="100">
-        <label for="product-name" class="ms-2">Tên sản phẩm <span class="text-danger">*</span></label>
+        <label for="product-name" class="ms-2 text-secondary">Tên sản phẩm <span class="text-danger">*</span></label>
         <div class="invalid-feedback">Vui lòng nhập tên sản phẩm, tối đa 100 kí tự!</div>
       </div>
       <div class="col-12 form-floating">
         <textarea class="form-control" placeholder="Mô tả sản phẩm" id="description" required minlength="10" maxlength="300" style="height: 150px; resize: none"></textarea>
-        <label for="description" class="ms-2">Mô tả <span class="text-danger">*</span></label>
+        <label for="description" class="ms-2 text-secondary">Mô tả <span class="text-danger">*</span></label>
         <div class="invalid-feedback">Vui lòng nhập mô tả, ít nhất 10 kí tự và tối đa 300 kí tự!</div>
       </div>
       <div class="col-12 images">
-        <label for="image-input" class="form-label">Ảnh (tối đa 6 ảnh) <span class="text-danger">*</span></label>
+        <label for="image-input" class="form-label text-secondary">Ảnh (tối đa 6 ảnh) <span class="text-danger">*</span></label>
         <input class="form-control" type="file" id="image-input" multiple required accept="image/*">
         <div class="invalid-feedback">Vui lòng chọn ít nhất 2 ảnh!</div>
         <button id="add-more-btn" type="button" class="btn btn-secondary d-none">+</button>
@@ -64,7 +70,7 @@
       </div>
       <div class="col-md-3 form-floating">
         <input type="text" class="form-control" id="street" placeholder="Địa chỉ cụ thể">
-        <label class="ms-2" for="street">Địa chỉ cụ thể</label>
+        <label class="ms-2 text-secondary" for="street">Địa chỉ cụ thể</label>
       </div>
       <div class="col-12">
         <button type="submit" class="btn btn-primary float-end">Đăng tin</button>

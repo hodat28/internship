@@ -2,7 +2,7 @@ import { displayCarousel } from "./carousel.js";
 import serverUrl from "./config.js";
 
 async function loadPosts() {
-    const url = `${serverUrl}/posts/newpost`;
+    const url = `${serverUrl}/post/newpost`;
     const postContainer = document.querySelector(".posts");
     postContainer.innerHTML = "";
 
@@ -20,7 +20,7 @@ async function loadPosts() {
             `
                 <a href="#" class="col text-decoration-none">
                     <div class="card">
-                    <img src="${data.images[0].image_url}" class="card-img-top" alt="product image">
+                    <img src="${data.images.length > 0 ? data.images[0].image_url : ''}" class="card-img-top" alt="product image">
                     <div class="card-body">
                         <h6 class="card-title">${data.title}</h6>
                         <p class="card-text text-danger price">${data.price} đ</p>
