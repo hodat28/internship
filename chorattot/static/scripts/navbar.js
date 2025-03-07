@@ -19,7 +19,7 @@ async function loadCategory() {
   const categoryContainer = document.querySelector(".category-container");
   const categories = await getCategoryList();
   categories.forEach((element) => {
-    categoryContainer.innerHTML += `<li><a class="dropdown-item" href="#">${element}</a></li>`;
+    categoryContainer.innerHTML += `<li><a class="dropdown-item" href="#">${element.name}</a></li>`;
   });
 }
 
