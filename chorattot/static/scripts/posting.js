@@ -70,6 +70,9 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
+  const spinner = document.getElementById("loading-spinner");
+  spinner.classList.remove("d-none");
+
   const formData = new FormData();
   const address = street.value.trim().length > 0 ? `${street.value}, ` : '' 
     + `${wardSelect.options[wardSelect.selectedIndex].text}, ${districtSelect.options[districtSelect.selectedIndex].text}, ${citySelect.options[citySelect.selectedIndex].text}`;
@@ -108,6 +111,8 @@ form.addEventListener("submit", async (e) => {
   } catch (error) {
     console.error("Lỗi khi gửi dữ liệu:", error);
     alert("Có lỗi xảy ra, vui lòng thử lại!");
+  } finally {
+    spinner.classList.add("d-none");
   }
   
 });
@@ -130,7 +135,7 @@ async function loadCity() {
     });
   } catch (error) {
     console.error(error.message);
-    // alert("Lỗi không thể lấy danh sách tỉnh/thành phố!");
+    console.error("Lỗi không thể lấy danh sách tỉnh/thành phố!");
   }
 }
 
@@ -146,7 +151,7 @@ async function getDistrict() {
     return json;
   } catch (error) {
     console.error(error.message);
-    // alert("Lỗi không thể lấy danh sách quận/huyện!");
+    console.error("Lỗi không thể lấy danh sách quận/huyện!");
   }
 };
 
@@ -162,8 +167,27 @@ async function getWard() {
     return json;
   } catch (error) {
     console.error(error.message);
-    // alert("Lỗi không thể lấy danh sách phường/xã!");
+    console.error("Lỗi không thể lấy danh sách quận/huyện!");
   }
+};
+
+function loadDistrict(provinceCode = citySelect.value) {
+  districtSelect.innerHTML = "";
+  districtList
+    .filter((p) => p.province_code == provinceCode)
+    .forEach((element) => {
+      districtSelect.innerHTML += `<option value="${element.code}">${element.name}</option>`;
+    });
+  loadWard(districtSelect.value)
+}
+
+async function loadWard(districtCode) {
+  wardSelect.innerHTML = "";  
+  wardList
+    .filter((w) => w.district_code == districtCode)
+    .forEach((element) => {
+      wardSelect.innerHTML += `<option value="${element.code}">${element.name}</option>`;
+    });
 }
 
 function validateTitle() {

@@ -118,3 +118,6 @@ def changePassword(request):
 
 def posting(request):
     return render(request, "posting.html")
+
+def productDetail(request, product_id):
+    return render(request, "productDetail.html", {'product_id': product_id})

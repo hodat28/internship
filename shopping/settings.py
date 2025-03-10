@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+load_dotenv()
 import pymysql
 pymysql.install_as_MySQLdb()
 
@@ -80,16 +82,16 @@ WSGI_APPLICATION = 'shopping.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'intern_backend',
-        'USER': 'root',
-        'PASSWORD': '111111',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
 AUTH_USER_MODEL = 'chorattot.User'
-EXTERNAL_API_URL = 'http://localhost:3000'
+EXTERNAL_API_URL = 'https://nodejs-cgor.onrender.com'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
