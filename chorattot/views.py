@@ -116,8 +116,14 @@ def newPassword(request):
 def changePassword(request):
     return render(request, 'changePassword.html')
 
+def profile(request):
+    return render(request, 'profile.html')
+
 def posting(request):
     return render(request, "posting.html")
 
 def productDetail(request, product_id):
     return render(request, "productDetail.html", {'product_id': product_id})
+
+def filterProduct(request, category_name):
+    return render(request, "filterPage.html", {'category_name': category_name})

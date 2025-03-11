@@ -1,6 +1,6 @@
 {% load static %}
 
-<nav class="navbar navbar-expand-lg navbar-default fixed-top">
+<nav class="navbar navbar-expand-lg navbar-default fixed-top header">
   <div class="container-fluid d-flex align-items-center">
     <a class="navbar-brand" href="{% url 'home' %}">
       <img
@@ -35,7 +35,7 @@
           Danh mục
         </a>
         <ul class="dropdown-menu category-container">
-          <li><a class="dropdown-item" href="#">Tất cả danh mục</a></li>
+          <li><a class="dropdown-item" href="/product/filter/all">Tất cả danh mục</a></li>
         </ul>
       </div>
       <div role="search" class="d-flex w-75 justify-content-center">

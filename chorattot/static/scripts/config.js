@@ -1,2 +1,2 @@
-const serverUrl = "http://localhost:4000/api";
+const serverUrl = "https://nodejs-cgor.onrender.com/api";
 export default serverUrl;
