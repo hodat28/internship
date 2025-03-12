@@ -13,7 +13,6 @@ const filterButton = document.querySelector(".filter-button");
 const params = new URLSearchParams();
 
 init();
-
 minPrice.addEventListener("input", updatePriceRange);
 maxPrice.addEventListener("input", updatePriceRange);
 
@@ -27,12 +26,14 @@ filterButton.addEventListener("click", async () => {
   const orderByTime = document.querySelector("#sort-select").value === "newPost";
   const productStatus = document.querySelector("#status-select").value;
   const location = document.querySelector("#location").value.trim();
+  const productName = document.querySelector("#product-name").value.trim();
   
   params.set("location", location);
   params.set("min_price", minVal);
   params.set("max_price", maxVal);
   params.set("newPost", orderByTime);
   params.set("product_status", productStatus);
+  params.set("product_name", productName);
 
   await loadPost(params);
 
