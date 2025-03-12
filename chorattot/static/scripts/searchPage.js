@@ -4,7 +4,7 @@ import { relativeTimeFromNow, formatMoney, getCity } from "./utils.js";
 loadPosts();
 
 async function loadPosts(page="") {
-  const url = `${serverUrl}/posts/all?product_name=${document.querySelector(".keyword").innerText.trim()}&pageSize=12&page=${page}`;
+  const url = `${serverUrl}/posts/all?product_name=${document.querySelector(".keyword").innerText.trim()}&pageSize=15&page=${page}`;
   const postContainer = document.querySelector(".posts");
   postContainer.innerHTML = "";
 

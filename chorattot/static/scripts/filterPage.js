@@ -96,11 +96,11 @@ async function init() {
 }
 
 async function loadPost(params = "", page = "") {
-  const url = `${serverUrl}/posts/all?${params}&pageSize=12&categoryName=${category.innerText !== "Tất cả danh mục" ? category.innerText : ''}&page=${page}`;
+  const url = `${serverUrl}/posts/all?pageSize=12${params}&categoryName=${category.innerText !== "Tất cả danh mục" ? category.innerText : ''}&page=${page}`;
   const postContainer = document.querySelector(".posts");
   postContainer.innerHTML = "";
   
-  // console.log(url);
+  console.log(url);
   try {
     const response = await fetch(url);
 
