@@ -127,3 +127,6 @@ def productDetail(request, product_id):
 
 def filterProduct(request, category_name):
     return render(request, "filterPage.html", {'category_name': category_name})
+
+def searchPage(request):
+    return render(request, "searchPage.html", {'search': request.GET.get("key")})

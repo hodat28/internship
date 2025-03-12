@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-  <div class="container mt-4">
+  <div class="container mt-4 position-relative">
     <div id="loading-spinner" class="position-absolute top-50 start-50 translate-middle d-none z-3 w-100 h-100">
       <div class="spinner-border text-primary" role="status">
         <span class="visually-hidden">Loading...</span>
@@ -52,6 +52,8 @@
           </select>
           <label for="location" class="form-label mt-3">Khu vực</label>
           <input type="text" id="location" class="form-control" placeholder="Nhập khu vực muốn tìm">
+          <label for="product-name" class="form-label mt-3">Tên sản phẩm</label>
+          <input type="text" id="product-name" class="form-control" placeholder="Nhập tên sản phẩm">
           <button class="btn btn-primary mt-3 filter-button">Lọc</button>
           </div>
         </div>

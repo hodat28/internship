@@ -1,5 +1,21 @@
 import serverUrl from "./config.js";
 
+const searchBar = document.querySelector(".search-input");
+const searchBtn = document.querySelector(".search-button");
+
+searchBar.addEventListener("keyup", (e) => {
+  e.preventDefault();
+  if (e.keyCode === 13) {
+    navigateSearch();
+  }
+});
+
+searchBtn.addEventListener("click", navigateSearch);
+
+function navigateSearch() {
+  window.location.href = `/product/search?key=${searchBar.value.trim()}`;
+}
+
 export async function getCategoryList() {
   const url = `${serverUrl}/categories/names`;
   try {
