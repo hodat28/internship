@@ -46,13 +46,13 @@ async function loadDetail() {
       imagesContainer.innerHTML += 
       `
         <div class="carousel-item ${index === 0 ? 'active' : ''}">
-          <img src="${img.image_url}" class="d-block" alt="...">
+          <img src="${img.image_url}" class="d-block" alt="product image">
         </div>
       `;
 
       thumbnailsContainer.innerHTML += 
       `
-        <img src="${img.image_url}" class="thumbnail ${index === 0 ? 'active-thumbnail' : ''}" 
+        <img src="${img.image_url}" alt="product image preview" class="thumbnail ${index === 0 ? 'active-thumbnail' : ''}" 
           data-bs-target="#product-images" data-bs-slide-to="${index}" onclick="changeSlide(${index})">
       `;
     });

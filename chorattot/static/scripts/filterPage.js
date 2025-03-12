@@ -10,6 +10,7 @@ const priceText = document.getElementById("price-range-text");
 const progress = document.querySelector(".progress");
 const minGap = 20000; // Khoảng cách tối thiểu giữa hai giá
 const filterButton = document.querySelector(".filter-button");
+const params = new URLSearchParams();
 
 init();
 
@@ -26,13 +27,12 @@ filterButton.addEventListener("click", async () => {
   const orderByTime = document.querySelector("#sort-select").value === "newPost";
   const productStatus = document.querySelector("#status-select").value;
   const location = document.querySelector("#location").value.trim();
-
-  const params = new URLSearchParams();
-  params.append("location", location);
-  params.append("min_price", minVal);
-  params.append("max_price", maxVal);
-  params.append("newPost", orderByTime);
-  params.append("product_status", productStatus);
+  
+  params.set("location", location);
+  params.set("min_price", minVal);
+  params.set("max_price", maxVal);
+  params.set("newPost", orderByTime);
+  params.set("product_status", productStatus);
 
   await loadPost(params);
 
@@ -99,7 +99,7 @@ async function loadPost(params = "", page = "") {
   const postContainer = document.querySelector(".posts");
   postContainer.innerHTML = "";
   
-  console.log(url);
+  // console.log(url);
   try {
     const response = await fetch(url);
 
@@ -167,7 +167,7 @@ function renderPagination(totalPages, currentPage) {
       e.preventDefault();
       const page = e.target.getAttribute("data-page");
       if (page) {
-        loadPost("", page); // Gọi lại API với số trang mới
+        loadPost(params, page); // Gọi lại API với số trang mới
       }
     });
   });
