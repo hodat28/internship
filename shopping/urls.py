@@ -30,4 +30,5 @@ urlpatterns = [
     path('newPassword/', views.newPassword, name="newPassword"),
     path('changePassword/', views.changePassword, name="changePassword"),
     path('product/detail/<int:product_id>', views.productDetail, name="product_detail"),
+    path('profile/', views.profile, name="profile"),
 ]
