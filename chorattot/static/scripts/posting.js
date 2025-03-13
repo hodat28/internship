@@ -1,5 +1,5 @@
-import { getCategoryList } from "./navbar.js";
 import serverUrl from "./config.js";
+import { getCategoryList } from "./navbar.js";
 
 const categoryContainer = document.querySelector("#category");
 const titleInput = document.querySelector("#title");
@@ -74,6 +74,7 @@ form.addEventListener("submit", async (e) => {
   spinner.classList.remove("d-none");
 
   const formData = new FormData();
+  const userID = document.cookie.split('; ').find(row => row.startsWith('user_id=')).split('=')[1];
   const address = street.value.trim().length > 0 ? `${street.value}, ` : '' 
     + `${wardSelect.options[wardSelect.selectedIndex].text}, ${districtSelect.options[districtSelect.selectedIndex].text}, ${citySelect.options[citySelect.selectedIndex].text}`;
 
@@ -86,7 +87,7 @@ form.addEventListener("submit", async (e) => {
   formData.append("product_status", document.querySelector("#status").value);
   formData.append("description", descInput.value.trim());
   formData.append("location", address);
-  formData.append("user_id", "1");
+  formData.append("user_id", userID);
 
   console.log(selectedFiles);
 
@@ -108,7 +109,7 @@ form.addEventListener("submit", async (e) => {
       throw new Error("Lỗi khi gửi dữ liệu");
     }
 
-    window.location.href = "http://localhost:8000";
+    window.location.href = "/";
 
   } catch (error) {
     console.error("Lỗi khi gửi dữ liệu:", error);
