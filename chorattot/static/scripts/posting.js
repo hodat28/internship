@@ -75,10 +75,7 @@ form.addEventListener("submit", async (e) => {
 
   const formData = new FormData();
   const userID = document.cookie.split('; ').find(row => row.startsWith('user_id=')).split('=')[1];
-  const address = street.value.trim().length > 0 ? `${street.value}, ` : '' 
-    + `${wardSelect.options[wardSelect.selectedIndex].text}, ${districtSelect.options[districtSelect.selectedIndex].text}, ${citySelect.options[citySelect.selectedIndex].text}`;
-
-  console.log(document.querySelector("#status").value);
+  const address = `${street.value.trim().length > 0 ? (street.value.trim() + ", ") : ''}${wardSelect.options[wardSelect.selectedIndex].text}, ${districtSelect.options[districtSelect.selectedIndex].text}, ${citySelect.options[citySelect.selectedIndex].text}`;
 
   formData.append("category_id", categoryContainer.value);
   formData.append("title", titleInput.value.trim());
