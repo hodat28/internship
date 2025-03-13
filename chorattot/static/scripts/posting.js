@@ -95,12 +95,14 @@ form.addEventListener("submit", async (e) => {
   });
 
   try {
-    const response = await fetch(`${serverUrl}/post`, {
+    const response = await fetch(`${serverUrl}/posts`, {
       method: "POST",
       body: formData,
     });
     
-    // const result = await response.json();
+    const result = await response.json();
+
+    console.log(result);
 
     if (!response.ok) {
       throw new Error("Lỗi khi gửi dữ liệu");

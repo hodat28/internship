@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Tất cả danh mục{% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'styles/filterPage.css' %}">
+  <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+  <link rel="stylesheet" href="{% static 'styles/loading.css' %}">
+  <script src="{% static 'scripts/filterPage.js' %}" type="module" defer></script>
+{% endblock %}
+
+{% block content %}
+  <div class="container mt-4 position-relative">
+    <div id="loading-spinner" class="position-absolute top-50 start-50 translate-middle d-none z-3 w-100 h-100">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-12">
+        <div class="card category-list py-3">
+          <div class="card-header bg-transparent fw-bold text-center">
+            Danh mục
+          </div>
+          <ul class="nav flex-column category-pick">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/product/filter/all">Tất cả danh mục</a>
+            </li>
+          </ul>
+        </div>
+        <div class="card mt-3 filter-card py-3">
+          <div class="card-header bg-transparent fw-bold text-center">
+            Lọc bài đăng
+          </div>
+          <div class="card-body">
+            <label class="form-label">Khoảng giá</label>
+            <div class="range-slider">
+              <input type="range" id="min-price" min="0" max="100000000" step="10000" value="0">
+              <input type="range" id="max-price" min="0" max="100000000" step="10000" value="100000000">
+              <div class="progress"></div>
+          </div>
+          <p class="text-center">Giá: <span id="price-range-text">0 - 1,000,000</span></p>
+          <label for="sort-select" class="form-label mt-3">Sắp xếp</label>
+          <select class="form-select" id="sort-select">
+            <option value="" selected>Mặc định</option>
+            <option value="newPost">Mới nhất</option>
+          </select>
+          <label for="status-select" class="form-label mt-3">Trạng thái sản phẩm</label>
+          <select class="form-select" id="status-select">
+            <option value="" selected>Tất cả</option>
+            <option value="Mới">Mới</option>
+            <option value="Đã qua sử dụng">Đã qua sử dụng</option>
+          </select>
+          <label for="location" class="form-label mt-3">Khu vực</label>
+          <input type="text" id="location" class="form-control" placeholder="Nhập khu vực muốn tìm">
+          <label for="product-name" class="form-label mt-3">Tên sản phẩm</label>
+          <input type="text" id="product-name" class="form-control" placeholder="Nhập tên sản phẩm">
+          <button class="btn btn-primary mt-3 filter-button">Lọc</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-9 col-12 border bg-light p-3 rounded">
+        <h2 class="category-name border-bottom pb-2 mb-3">{{ category_name }}</h2>
+        <div class="row row-cols-12 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 gy-5 d-flex align-items-stretch posts mb-5"></div>
+        <div id="pagination-container"></div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

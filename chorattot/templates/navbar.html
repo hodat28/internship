@@ -1,6 +1,6 @@
 {% load static %}
 
-<nav class="navbar navbar-expand-lg navbar-default fixed-top">
+<nav class="navbar navbar-expand-lg navbar-default fixed-top header">
   <div class="container-fluid d-flex align-items-center">
     <a class="navbar-brand" href="{% url 'home' %}">
       <img
@@ -35,17 +35,17 @@
           Danh mục
         </a>
         <ul class="dropdown-menu category-container">
-          <li><a class="dropdown-item" href="#">Tất cả danh mục</a></li>
+          <li><a class="dropdown-item" href="/product/filter/all">Tất cả danh mục</a></li>
         </ul>
       </div>
       <div role="search" class="d-flex w-75 justify-content-center">
         <input
-          class="form-control me-2 w-75"
+          class="form-control me-2 w-75 search-input"
           type="search"
           placeholder="Tìm kiếm"
           aria-label="Search"
         />
-        <button class="btn text-light" type="submit">
+        <button class="btn text-light search-button" type="submit">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <title>Tìm kiếm</title>
             <path

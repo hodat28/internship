@@ -9,7 +9,9 @@ console.log(productId);
 loadDetail();
 
 async function loadDetail() {
-  const url = `${serverUrl}/post/${productId}`;
+  const url = `${serverUrl}/posts/${productId}`;
+  const spinner = document.getElementById("loading-spinner");
+  spinner.classList.remove("d-none");
 
   try {
     const response = await fetch(url);
@@ -27,6 +29,7 @@ async function loadDetail() {
     document.querySelector(".name").innerText = json.data.product_name;
     document.querySelector(".price").innerText = formatMoney(Number(json.data.price)) + " đ";
     document.querySelector(".category-status .category").innerText = json.data.Category.name;
+    document.querySelector(".category-status .category").href = `/product/filter/${json.data.Category.name}`;
     document.querySelector(".category-status .status").innerText = json.data.product_status;
     document.querySelector(".location").innerText = json.data.location;
     document.querySelector(".update-at").innerText = `Cập nhật ${relativeTimeFromNow(json.data.updated_at)}`;
@@ -43,20 +46,23 @@ async function loadDetail() {
       imagesContainer.innerHTML += 
       `
         <div class="carousel-item ${index === 0 ? 'active' : ''}">
-          <img src="${img.image_url}" class="d-block" alt="...">
+          <img src="${img.image_url}" class="d-block" alt="product image">
         </div>
       `;
 
       thumbnailsContainer.innerHTML += 
       `
-        <img src="${img.image_url}" class="thumbnail ${index === 0 ? 'active-thumbnail' : ''}" 
+        <img src="${img.image_url}" alt="product image preview" class="thumbnail ${index === 0 ? 'active-thumbnail' : ''}" 
           data-bs-target="#product-images" data-bs-slide-to="${index}" onclick="changeSlide(${index})">
       `;
     });
     
   } catch (error) {
       console.error(error.message);
+  } finally {
+    spinner.classList.add("d-none");
   }
+  
 }
 
 window.changeSlide = function(index) {
