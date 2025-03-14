@@ -1,0 +1,80 @@
+{% extends 'base.html' %} {% load static %} 
+{% block title %}Chợ rất tốt{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+<meta name="csrf-token" content="{{ csrf_token }}">
+{% endblock %}
+{% block content %}
+<section class="vh-75">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card text-black-100" style="border-radius: 1rem">
+          <div class="w-100 py-5">
+            <img
+              class="rounded mx-auto d-block"
+              src="{% static 'images/logo.png' %}"
+              alt="Logo"
+            />
+          </div>
+          <div class="card-body p-5 pt-0 text-left">
+            <div class="md-5 mt-md-4 pb-5">
+              <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                {% if messages %}
+                  {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} text-danger">{{ message }}</div>
+                  {% endfor %}
+                {% endif %}
+                <h2 class="fw-bold mb-4 text-uppercase">Đăng nhập</h2>
+                <div data-mdb-input-init class="form-outline form-white mb-4">
+                  <input
+                    type="email"
+                    name="email"
+                    id="user_email"
+                    class="form-control form-control-lg text-black-50 fs-6"
+                    placeholder="Email"
+                  />
+                </div>
+
+                <div data-mdb-input-init class="form-outline form-white mb-4">
+                  <input
+                    type="password"
+                    name="password"
+                    id="user_password"
+                    class="form-control form-control-lg text-black-50 fs-6"
+                    placeholder="Mật khẩu"
+                  />
+                </div>
+
+                <p class="small mb-4 pb-lg-2">
+                  <a
+                    class="text-black-50 link-offset-2 link-offset-3-hover link-underline-secondary link-underline-opacity-0 link-underline-opacity-75-hover"
+                    href="/forgotPassword"
+                  >Quên mật khẩu?</a>
+                </p>
+
+                <button
+                  data-mdb-button-init
+                  data-mdb-ripple-init
+                  class="btn btn-primary rounded w-100 px-5"
+                  style="background-color: #0047ab"
+                  type="submit"
+                >
+                  Đăng nhập
+                </button>
+              </form>
+            </div>
+            <div>
+              <p class="mb-0">
+                Bạn chưa có tài khoản?
+                <a href="{% url 'register' %}" class="text-black-50 fw-bold">Đăng ký ngay!</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

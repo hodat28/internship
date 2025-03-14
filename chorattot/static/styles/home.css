@@ -1,0 +1,27 @@
+.post {
+  height: 350px;
+  width: 200px;
+  transition: all 0.3s;
+}
+
+.post:hover {
+  transform: scale(1.15);
+}
+
+.card-img-top {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;  
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.time-address {
+  font-size: 10px;
+}

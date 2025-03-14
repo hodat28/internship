@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Trang chủ{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+    <script src="{% static 'scripts/home.js' %}" type="module" defer></script>
+{% endblock %}
+
+{% block content %}
+  {% include 'carousel.html' %} 
+  <h1 class="text-center my-4 h1">Tin mới</h1>
+  <div class="container">
+    <div class="row row-cols-2 row-cols-xl-5 row-cols-md-3 row-cols-lg-4 gy-5 d-flex align-items-stretch posts"></div>
+  </div>
+  {% comment %} <div class="container mt-5">
+    <div class="row">
+      <div class="col text-center">
+        <buatton class="btn font-weight-bold fs-5 border border-3 border-primary">Xem thêm</button>
+      </div>
+    </div>
+  </div> {% endcomment %}
+{% endblock %}

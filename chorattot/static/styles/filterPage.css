@@ -1,0 +1,33 @@
+.category-list {
+  height: 300px;
+  overflow-y: auto;
+}
+
+.range-slider {
+  position: relative;
+  width: 100%;
+  height: 30px;
+}
+.range-slider input {
+  position: absolute;
+  width: 100%;
+  pointer-events: none;
+  appearance: none;
+  background: transparent;
+}
+.range-slider input::-webkit-slider-thumb {
+  pointer-events: auto;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #007bff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.range-slider .progress {
+  position: absolute;
+  height: 5px;
+  background: #007bff;
+  top: 50%;
+  transform: translateY(-50%);
+}

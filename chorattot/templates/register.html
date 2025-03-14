@@ -1,0 +1,85 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Chợ rất tốt{% endblock %} {% block head %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+{% endblock %} {% block content %}
+<section class="vh-75">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card text-black-100" style="border-radius: 1rem">
+          <div class="w-100 py-5">
+            <img
+              class="rounded mx-auto d-block"
+              src="{% static 'images/logo.png' %}"
+              alt="Logo"
+            />
+          </div>
+          <div class="card-body p-5 pt-0 text-left">
+            <div class="md-5 mt-md-4 pb-5">
+              <form action="{% url 'register' %}" method="POST">
+                {% csrf_token %}
+                <h2 class="fw-bold mb-4 text-uppercase">Đăng ký</h2>
+                {% if messages %}
+                  {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} text-danger">{{ message }}</div>
+                  {% endfor %}
+                {% endif %}
+                <div data-mdb-input-init class="form-outline form-white mb-4">
+                  <input
+                    type="email"
+                    name="email"
+                    id="user_email"
+                    class="form-control form-control-lg text-black-50 fs-6"
+                    placeholder="Email"
+                  />
+                </div>
+                <div data-mdb-input-init class="form-outline form-white mb-4">
+                  <input
+                    type="phone"
+                    name="phone"
+                    id="user_phone"
+                    class="form-control form-control-lg text-black-50 fs-6"
+                    placeholder="Số điện thoại"
+                  />
+                </div>
+                <div data-mdb-input-init class="form-outline form-white mb-4">
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    class="form-control form-control-lg text-black-50 fs-6"
+                    placeholder="Mật khẩu"
+                  />
+                </div>
+                <div data-mdb-input-init class="form-outline form-white mb-4">
+                  <input
+                    type="password"
+                    name="password_confirm"
+                    id="password_confirm"
+                    class="form-control form-control-lg text-black-50 fs-6"
+                    placeholder="Xác nhận mật khẩu"
+                  />
+                </div>
+                <button
+                  data-mdb-button-init
+                  data-mdb-ripple-init
+                  class="btn btn-primary rounded w-100 px-5"
+                  style="background-color: #0047ab"
+                  type="submit"
+                >
+                  Đăng ký
+                </button>
+              </form>
+            </div>
+            <div>
+              <p class="mb-0">
+                Đã có tài khoản?
+                <a href="{% url 'login' %}" class="text-black-50 fw-bold">Đăng nhập ngay!</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

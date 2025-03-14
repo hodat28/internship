@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'styles/productDetail.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/loading.css' %}">
+    <script src="{% static 'scripts/productDetail.js' %}" type="module" defer></script>
+{% endblock %}
+
+{% block content %}
+    <h1 class="d-none product-id">{{product_id}}</h1>
+    <div class="container position-relative my-4 d-flex flex-wrap gap-5 justify-content-center bg-light rounded py-4">
+        <div id="loading-spinner" class="position-absolute top-50 start-50 translate-middle d-none z-3 w-100 h-100">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <div class="d-flex flex-lg-row flex-column-reverse align-items-center justify-content-center gap-3">
+            <!-- Phần ảnh nhỏ (thumbnail) -->
+            <div id="product-thumbnails" class="d-flex flex-lg-column "></div>
+        
+            <!-- Phần carousel chính -->
+            <div id="product-images" class="carousel slide carousel-fade">
+                <div class="carousel-inner"></div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#product-images" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#product-images" data-bs-slide="next">
+                    <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="detail">
+            <h4 class="title"></h4>
+            <p class="name"></p>
+            <p class="text-danger fs-5 fw-bold price"></p>
+            <div class="category-status mb-2">
+                <a href="#" class="category text-decoration-none text-bg-secondary p-1"></a>
+                <span class="status text-bg-secondary p-1"></span>
+            </div>
+            <div class="time">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title></title><path d="M21 13.1C20.9 13.1 20.7 13.2 20.6 13.3L19.6 14.3L21.7 16.4L22.7 15.4C22.9 15.2 22.9 14.8 22.7 14.6L21.4 13.3C21.3 13.2 21.2 13.1 21 13.1M19.1 14.9L13 20.9V23H15.1L21.2 16.9L19.1 14.9M12.5 7V12.2L16.5 14.6L15.5 15.6L11 13V7H12.5M11 21.9C5.9 21.4 2 17.1 2 12C2 6.5 6.5 2 12 2C17.3 2 21.6 6.1 22 11.3C21.7 11.2 21.4 11.1 21 11.1C20.6 11.1 20.3 11.2 20 11.3C19.6 7.2 16.2 4 12 4C7.6 4 4 7.6 4 12C4 16.1 7.1 19.5 11.1 19.9L11 20.1V21.9Z" style="fill: black;"/></svg>
+                <span class="update-at"></span>
+            </div>
+            <div class="address my-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title></title><path d="M12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5M12,2A7,7 0 0,1 19,9C19,14.25 12,22 12,22C12,22 5,14.25 5,9A7,7 0 0,1 12,2M12,4A5,5 0 0,0 7,9C7,10 7,12 12,18.71C17,12 17,10 17,9A5,5 0 0,0 12,4Z" style="fill: black;"/></svg>
+                <span class="location"></span>
+            </div>
+            <div class="interact">
+                <button class="btn btn-chat btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>message-text</title><path d="M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4A2,2 0 0,0 20,2M6,9H18V11H6M14,14H6V12H14M18,8H6V6H18" /></svg>
+                    <span>Chat</span>
+                </button>
+                <button class="btn btn-phone">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>cellphone</title><path d="M17,19H7V5H17M17,1H7C5.89,1 5,1.89 5,3V21A2,2 0 0,0 7,23H17A2,2 0 0,0 19,21V3C19,1.89 18.1,1 17,1Z" style="fill: var(--blue);"/></svg>
+                    <span></span>
+                </button>
+                <button class="btn btn-save">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>save</title><path d="M12.67 20.74L12 21.35L10.55 20.03C5.4 15.36 2 12.27 2 8.5C2 5.41 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.41 22 8.5C22 9.93 21.5 11.26 20.62 12.61C20 12.31 19.31 12.11 18.59 12.04C19.5 10.8 20 9.65 20 8.5C20 6.5 18.5 5 16.5 5C14.96 5 13.46 6 12.93 7.36H11.07C10.54 6 9.04 5 7.5 5C5.5 5 4 6.5 4 8.5C4 11.39 7.14 14.24 11.89 18.55L12 18.65L12.04 18.61C12.12 19.37 12.34 20.09 12.67 20.74M17 14V17H14V19H17V22H19V19H22V17H19V14H17Z" style="fill: var(--blue);"/></svg>
+                    <span>Lưu</span>
+                </button>
+            </div>
+            <div class="seller d-flex mt-3 gap-3 border p-2 shadow-sm align-items-center rounded">
+                <a href="#" class="text-decoration-none text-dark">
+                    <div class="avatar-container">
+                        <img src="" class="seller-avatar border" alt="seller avatar">
+                    </div>
+                </a>
+                <a href="#" class="text-decoration-none text-dark">
+                    <div class="info">
+                        <div class="seller-name text-truncate fw-bold"></div>
+                        <div class="rating-container d-flex align-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>star</title><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" style="fill: rgb(255, 186, 0)"/></svg>
+                            <span class="rating"></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container rounded bg-light py-4 d-flex flex-column flex-wrap gap-2 justify-content-center align-items-center">
+        <h4>Mô tả chi tiết</h4>
+        <div class="description"></div>
+    </div>
+{% endblock %}
