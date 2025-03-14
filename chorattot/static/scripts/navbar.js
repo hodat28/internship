@@ -4,17 +4,20 @@ const searchBar = document.querySelector(".search-input");
 const searchBtn = document.querySelector(".search-button");
 
 document.addEventListener('DOMContentLoaded', function() {
-  const email = document.cookie.split('; ').find(row => row.startsWith('user_email=')).split('=')[1];
-    fetch(`${serverUrl}/user/get/${email}`)
+  let email = document.cookie.split('; ').find(row => row.startsWith('user_email=')).split('=')[1];
+  email = email.substring(1, email.length - 1)
+  console.log(email);
+  
+    fetch(`${serverUrl}/users/get/${email}`)
       .then(response => response.json())
       .then(data => {
-        // Gán dữ liệu vào các phần tử trong trang
-        document.querySelector('.cover-image').src = data.cover_image_url;
-        document.querySelector('.avatar').src = data.avatar_url;
-        document.querySelector('.content-below h4').textContent = data.name;
-        document.querySelector('.content-below p').textContent = data.address;
-        document.querySelector('.star-rating').textContent = data.rating;
-        // Cập nhật các phần tử khác tương tự
+        data.cover_image_url != null ? document.querySelector('.cover-image').src = data.cover_image_url : "https://cellphones.com.vn/sforum/wp-content/uploads/2024/04/anh-bia-facebook-30.jpg";
+        data.avatar_url != null ? document.querySelector('.avatar').src = data.avatar_url : "https://i.pinimg.com/736x/b7/91/44/b79144e03dc4996ce319ff59118caf65.jpg";
+        data.name == null ? document.querySelector('.user-name').textContent = "Tên chưa cập nhật" : data.name;
+        data.address == null ? document.querySelectorAll('.user-address')[0].innerHTML = "Việt Nam" : data.address;
+        data.address == null ? document.querySelectorAll('.user-address')[1].innerHTML = "Việt Nam" : data.address;
+        data.phone != null ? document.querySelector('.user-phone').textContent = data.phone : "Chưa cập nhật";
+        data.rating != null ? document.querySelector('.star-rating').textContent = `★★★★★ (${data.rating} đánh giá)` : "★★★★★ (10 đánh giá)";
       })
       .catch(error => console.error('Error fetching user data:', error));
   });

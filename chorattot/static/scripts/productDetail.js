@@ -33,7 +33,7 @@ async function loadDetail() {
     document.querySelector(".category-status .status").innerText = json.data.product_status;
     document.querySelector(".location").innerText = json.data.location;
     document.querySelector(".update-at").innerText = `Cập nhật ${relativeTimeFromNow(json.data.updated_at)}`;
-    document.querySelector(".seller-avatar").src = json.data.User.UserInfo.avatar_url;
+    json.data.avatar_url == null ? document.querySelector(".seller-avatar").src = "https://i.pinimg.com/736x/b7/91/44/b79144e03dc4996ce319ff59118caf65.jpg" : json.data.User.UserInfo.avatar_url;
     document.querySelector(".seller-name").innerText = json.data.User.UserInfo.name;
     document.querySelector(".rating").innerText = json.data.User.UserInfo.rating;
     document.querySelector(".description").innerText = json.data.description;

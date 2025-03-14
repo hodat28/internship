@@ -1,9 +1,31 @@
-selectedReceiverId = '26';  // ID người nhận được chọn từ giao diện
-selectedPostId = '54';
+import serverUrl from "./config.js";
+import { socketUrl } from './config.js';
+
+const selectedReceiverId = '26';  // ID người nhận được chọn từ giao diện
+const selectedPostId = '62';
      // Post ID sẽ được lấy từ API hoặc giao diện
 
+// lấy token từ cookie
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) {
+        return parts.pop().split(';').shift();
+    }
+}
+const token = getCookie('user_token');
+const connection_url = `${socketUrl}?token=${token}`;
+
+console.log("Token:", token);
+console.log("Connection URL:", connection_url);
+
 // Mở kết nối WebSocket
-const socket = new WebSocket('ws://nodejs-cgor.onrender.com?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI2LCJyb2xlIjoidXNlciIsImVtYWlsIjoiYUB2LmNvbSIsImlhdCI6MTc0MTc2OTkyOSwiZXhwIjoxNzQxNzczNTI5fQ.TxT9Gx0rHHKXvgUIrb4qZJDaIzZu80dxdfchyX85SD4');
+let socket = new WebSocket(socketUrl, ["token", token]);
+if (!socket) {
+    console.error('Failed to create WebSocket connection!');
+} else {
+    console.log('WebSocket connection created successfully!');
+}
 
 // Xử lý khi kết nối thành công
 socket.addEventListener('open', function(event) {
@@ -26,7 +48,7 @@ socket.addEventListener('message', function(event) {
 });
 // API HTTP: Nhận thông tin chi tiết của 1 person khi nhấp vào
 function loadPersonDetails(receiverid) {
-    fetch(`http://127.0.0.1:4000/api/users/${receiverid}`)
+    fetch(`${serverUrl}/users/${receiverid}`)
         .then(response => response.json())
         .then(data => {
             const personInfo = data.data;  // Giả sử API trả về dữ liệu trong 'data'
@@ -100,7 +122,7 @@ document.getElementById('submit-send').addEventListener('click', function() {
 });
 
 // API HTTP: Nhận thông tin cuộc trò chuyện
-fetch('http://127.0.0.1:4000/api/chat/conversations')
+fetch(`${serverUrl}/chat/conversations`)
     .then(response => response.json())
     .then(data => {
         const sidebar = document.querySelector('.sidebar');

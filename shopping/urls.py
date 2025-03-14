@@ -33,4 +33,5 @@ urlpatterns = [
     path('product/detail/<int:product_id>', views.productDetail, name="product_detail"),
     path('product/filter/<str:category_name>', views.filterProduct, name="filter_product"),
     path('product/search', views.searchPage, name="search"),
+    path('message/', views.messagesPage, name="message"),
 ]

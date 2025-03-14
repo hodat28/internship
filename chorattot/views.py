@@ -117,13 +117,14 @@ def login(request):
                 user_email = data.get('metadata', {}).get('user', {}).get('email')  # Lấy email từ API
                 access_token = data.get('metadata', {}).get('token', {}).get('accessToken')  # Token
 
-                # ✅ Lưu token vào session Django
+                # ✅ Lưu token vào sessionStorage
                 request.session['token'] = access_token
-
+                
                 # ✅ Truyền ID và email đến template để lưu vào localStorage bằng JavaScript
                 response = redirect('profile')
                 response.set_cookie('user_id', user_id)
                 response.set_cookie('user_email', user_email)
+                response.set_cookie('user_token', access_token)
                 return response
             else:
                 messages.error(request, data.get('error', 'Sai email hoặc mật khẩu.'))
@@ -167,3 +168,6 @@ def searchPage(request):
 
 def profile(request):
     return render(request, "profile.html")
+
+def messagesPage(request):
+    return render(request, "message.html")
