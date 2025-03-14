@@ -1,0 +1,12 @@
+nav {
+  background-color: var(--blue);
+}
+
+.navbar-nav>li>a{
+  color: white !important;
+}
+
+.dropdown-menu {
+  max-height: 300px;
+  overflow-y: auto;
+}

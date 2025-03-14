@@ -16,11 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from chorattot.views import home, posting
+from chorattot.views import profile
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", home, name="home"),
-    path("posting", posting, name="posting"),
+    path("", profile, name="profile"),
 ]
