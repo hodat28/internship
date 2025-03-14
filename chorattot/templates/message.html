@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Nhắn tin{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'styles/message.css' %}">
+<script src="{% static 'scripts/message.js' %}" type="module" defer></script>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid d-flex p-0 message-container">
+    <div class="sidebar col-md-3 bg-light p-3 shadow-sm overflow-auto">
+        <h2>Contacts</h2>
+        <!-- Danh sách contacts sẽ được thêm động bởi JavaScript -->
+    </div>
+ 
+    <div class="chat-area col-md-6 d-flex flex-column bg-white">
+        <div class="chat-header p-3 text-center text-white bg-success">
+            <h2 id="product-info">Chat Title</h2>
+        </div>
+        <div class="chat-messages flex-grow-1 p-3 overflow-auto bg-light border">
+            <!-- Tin nhắn sẽ được thêm động bởi JavaScript -->
+        </div>
+        <div class="chat-input p-3 border-top d-flex align-items-center border">
+            <button class="btn btn-success rounded-circle mr-3" style="width: 40px; height: 40px;">+</button>
+            <input id="message-input" type="text" class="form-control mr-3" placeholder="Type a message">
+            <button id="submit-send" class="btn btn-success">Send</button>
+        </div>
+    </div>
+ 
+    <div class="info-area col-md-3 bg-light p-3 shadow-sm text-center">
+        <h2>Details</h2>
+        <div class="info-avatar bg-secondary rounded-circle mx-auto mb-3" style="width: 100px; height: 100px; background-size: cover; background-position: center;"></div>
+        <div class="info-name font-weight-bold">Person Name</div>
+        <div class="info-actions mt-4 d-flex justify-content-around">
+            <!-- Link profile sẽ được thêm động bởi JavaScript -->
+            <button class="btn btn-link d-flex flex-column align-items-center">
+                <img src="https://cdn-icons-png.flaticon.com/512/482/482631.png" alt="Search" class="mb-1" style="width: 30px; height: 30px;">
+                <span class="font-weight-bold">Search</span>
+            </button>
+            <button class="btn btn-link d-flex flex-column align-items-center">
+                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile" class="mb-1" style="width: 30px; height: 30px;">
+                <span class="font-weight-bold">Profile</span>
+            </button>
+            <button class="btn btn-link d-flex flex-column align-items-center">
+                <img src="https://cdn-icons-png.flaticon.com/512/1828/1828843.png" alt="Block" class="mb-1" style="width: 30px; height: 30px;">
+                <span class="font-weight-bold">Block</span>
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
